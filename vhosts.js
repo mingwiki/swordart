@@ -21,6 +21,16 @@ const vhosts = config.map((item) => {
         key: fs.readFileSync(key, 'utf8'),
         cert: fs.readFileSync(cert, 'utf8'),
       },
+      [enable_ssl ? 'secure' : null]: true,
+      ciphers: [
+        'ECDHE-RSA-AES128-SHA256',
+        'DHE-RSA-AES128-SHA256',
+        'AES128-GCM-SHA256',
+        'RC4',
+        'HIGH',
+        'MD5',
+        'aNULL',
+      ].join(':'),
     })
   })
   return [enable_ssl, vhost(domain, app)]
